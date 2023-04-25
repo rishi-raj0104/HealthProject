@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parkinson's Diseases Prediction</title>
+    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+        
+    <style>
+        @import "compass/css3";
+        @import url(https://fonts.googleapis.com/css?family=Dosis:300|Lato:300,400,600,700|Roboto+Condensed:300,700|Open+Sans+Condensed:300,600|Open+Sans:400,300,600,700|Maven+Pro:400,700);
+        @import url('https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
+
+        *   {
+            @include box-sizing(border-box);
+            }
+
+        html {
+                background: black;
+            }
+
+        body {
+        font-family: "Open Sans";
+        font-size: 16px;
+        color: White;
+        font-smoothing: antialiased;
+        font-weight: 600;
+        }
+
+        .content:before {
+        content: "";
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0; bottom: 0;
+        z-index: -1;
+        display: block;
+        background-color: black;
+        background-image: url('https://post.healthline.com/wp-content/uploads/2020/09/11008-Parkinsons_Disease_1200x628-facebook-1200x628.jpg');
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+
+        -webkit-filter: blur(2px);
+        -moz-filter: blur(2px);
+        -o-filter: blur(2px);
+        -ms-filter: blur(2px);
+        filter: blur(2px);
+    }
+
+        .content {
+        position: absolute;
+        top: 0; bottom: 0; left: 0; right: 0;
+        width: 540px;
+        height: 540px;
+
+        background-color: rgba(10, 10, 10, 0.5);
+        margin: auto auto;
+        padding: 40px;
+        text-align: center;
+
+        @include border-radius(4px);
+        @include box-shadow(0 0 10px rgba(0,0,0,1));
+        }
+
+        h1 {
+
+            text-align: center;
+            font-size: 2.0rem;
+            font-weight: 600;
+            color: White;
+            padding-bottom: 30px;
+
+        }
+
+        input {
+            width: 80%;
+            font-size: 1.2rem;
+            font-family: "Open Sans";
+
+            margin: 10px 0px;
+
+            border: none;
+            padding: 10px;
+
+            @include border-radius(4px);
+
+        }
+
+        button {
+            width: 80%;
+            font-size: 1.1rem;
+            padding: 10px;
+            margin: 20px 0px;
+
+            background-color: #66A756;
+            color: White;
+            border: none;
+            border-radius: 25px
+            @include border-radius(4px);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Health</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="/braintumor">Brain Tumor</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="/breastcancer">Breast Cancer</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="/pneumonia">Pneumonia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="/parkinson">Parkinson</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="content">
+        <h1>Parkinson's Diseases Prediction</h1>
+        <!--<div class="flex-form">-->
+            <form action="/results" method="POST">
+                <input type="float" name="mdvp_fo" id="mdvp_fo" placeholder="MDVP:Fo(Hz) range(88,260)">
+                <input type="float" name="mdvp_fhi" id="mdvp_fhi" placeholder="MDVP:Fhi(Hz) range(102,592)">
+                <input type="float" name="mdvp_flo" id="mdvp_flo" placeholder="MDVP:Flo(Hz) range(65,240)">
+                <input type="float" name="mdvp_jitper" id="mdvp_jitper" placeholder="MDVP:Jitter(%) range(0.001, 0.033)">
+                <input type="float" name="mdvp_jitabs" id="mdvp_jitabs" placeholder="MDVP:Jitter(Abs) range(0.00002, 0.0002)">
+                <input type="float" name="mdvp_rap" id="mdvp_rap" placeholder="MDVP:RAP range(0.0006, 0.02)">
+                <input type="float" name="mdvp_ppq" id="mdvp_ppq" placeholder="MDVP:PPQ range(0.0009, 0.02)">
+                <input type="float" name="jitter_ddp" id="jitter_ddp" placeholder="Jitter:DDP range(0.002, 0.065)">
+                <input type="float" name="mdvp_shim" id="mdvp_shim" placeholder="MDVP:Shimmer range(0.009, 0.12)">
+                <input type="float" name="mdvp_shim_db" id="mdvp_shim_db" placeholder="MDVP:Shimmer(dB) range(0.085, 1.302)">
+                <input type="float" name="shimm_apq3" id="shimm_apq3" placeholder="Shimmer:APQ3 range(0.004, 0.056)">
+                <input type="float" name="shimm_apq5" id="shimm_apq5" placeholder="Shimmer:APQ5 range(0.005, 0.08)">
+                <input type="float" name="mdvp_apq" id="mdvp_apq" placeholder="MDVP:APQ range(0.007, 0.14)">
+                <input type="float" name="shimm_dda" id="shimm_dda" placeholder="Shimmer:DDA range(0.013, 0.17)">
+                <input type="float" name="nhr" id="nhr" placeholder="NHR range(0.0006, 0.31)">
+                <input type="float" name="hnr" id="hnr" placeholder="HNR range(8, 33)">
+                <input type="float" name="rpde" id="rpde" placeholder="RPDE range(0.25, 0.68)">
+                <input type="float" name="dfa" id="dfa" placeholder="DFA range(0.57, 0.82)">
+                <input type="float" name="spread1" id="spread1" placeholder="Spread1 range(-7, -2)">
+                <input type="float" name="spread2" id="spread2" placeholder="Spread2 range(0.006, 0.45)">
+                <input type="float" name="d2" id="d2" placeholder="D2 range(1.42, 3.67)">
+                <input type="float" name="ppe" id="ppe" placeholder="PPE range(0.04, 0.5)">
+                
+                <button type="submit" value="results">results</button>
+            </form>
+        <!--</div>-->
+    </div>
+</body>
+</html>
